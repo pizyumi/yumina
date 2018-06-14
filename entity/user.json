@@ -1,0 +1,26 @@
+{
+    "name": "user", 
+    "schema": [
+        {
+            "name": "id", 
+            "type": "integer", 
+            "key": true
+        }, 
+        {
+            "name": "name", 
+            "type": "string", 
+            "max": 256
+        }, 
+        {
+            "name": "password", 
+            "type": "string", 
+            "max": 256
+        }, 
+        {
+            "name": "delete_date", 
+            "type": "date", 
+            "null": true
+        }
+    ], 
+    "auth": []
+}
