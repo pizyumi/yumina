@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "name": "yume",
+        "password": "ippai",
+        "delete_date": null
+    },
+    {
+        "id": 2,
+        "name": "yurina",
+        "password": "kawaii",
+        "delete_date": "2018-05-31T12:21:03.123Z"
+    },
+    {
+        "id": 3,
+        "name": "yumina",
+        "password": "mtftx",
+        "delete_date": null
+    }
+]
