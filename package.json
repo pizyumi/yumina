@@ -15,6 +15,7 @@
     "fs-extra": "^6.0.1",
     "mocha": "^5.2.0",
     "p-iteration": "^1.1.7",
+    "pg": "^7.4.3",
     "strip-bom": "^3.0.0",
     "underscore": "^1.9.1"
   }
