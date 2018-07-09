@@ -68,7 +68,7 @@ module.exports = async (pdb, e) => {
     };
 
     try {
-      funcs = _.extend({}, funcs, require(path.join(process.cwd(), e.get_entity_path(name), 'dao.js'))(funcs, dao, db));
+      funcs = _.extend({}, funcs, require(path.join(process.cwd(), e.get_entity_path(name), 'dao.js'))(funcs, dao, db, common));
     }
     catch (err) {
       console.log(err.message.magenta);
