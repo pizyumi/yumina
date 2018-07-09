@@ -16,6 +16,8 @@ module.exports = async (db, e) => {
     var name = v.name;
     var table = await e.get_table_name(name);
     var keys = await e.get_table_key_column_names(v);
+    var nlkeys = _(keys).initial();
+    var lkey = _(keys).last();
     var normals = await e.get_table_not_key_column_names(v);
     var uniques = _(normals).filter((v) => !common_columns.includes(v));
 
@@ -26,39 +28,24 @@ module.exports = async (db, e) => {
       return await get_list(db, table, _.pick(ids, keys), orders);
     };
     d[name] = async (ids) => {
-      if (_(keys).all((v) => ids[v] !== undefined)) {
-        return await get_item(db, table, _.pick(ids, keys));
-      }
-      else {
-        throw new Error('insufficient ids.');
-      }
+      check_ids(ids, keys);
+
+      return await get_item(db, table, _.pick(ids, keys));
     };
     d[name + '_new'] = async (ids, pobj) => {
-      var nlkeys = _(keys).initial();
-      var lkey = _(keys).last();
+      check_ids(ids, nlkeys);
 
-      if (_(nlkeys).all((v) => ids[v] !== undefined)) {
-        return await new_item(db, table, lkey, _.pick(ids, nlkeys), _.pick(pobj, uniques));
-      }
-      else {
-        throw new Error('insufficient ids.');
-      }
+      return await new_item(db, table, lkey, _.pick(ids, nlkeys), _.pick(pobj, uniques));
     };
     d[name + '_update'] = async (ids, pobj) => {
-      if (_(keys).all((v) => ids[v] !== undefined)) {
-        return await update_item(db, table, _.pick(ids, keys), _.pick(pobj, uniques));
-      }
-      else {
-        throw new Error('insufficient ids.');
-      }
+      check_ids(ids, keys);
+
+      return await update_item(db, table, _.pick(ids, keys), _.pick(pobj, uniques));
     };
     d[name + '_delete'] = async (ids) => {
-      if (_(keys).all((v) => ids[v] !== undefined)) {
-        return await delete_item(db, table, _.pick(ids, keys));
-      }
-      else {
-        throw new Error('insufficient ids.');
-      }
+      check_ids(ids, keys);
+
+      return await delete_item(db, table, _.pick(ids, keys));
     };
 
     try {
@@ -71,6 +58,15 @@ module.exports = async (db, e) => {
 
   return d;
 };
+
+function check_ids (ids, keys) {
+  if (_(keys).all((v) => ids[v] !== undefined)) {
+    return;
+  }
+  else {
+    throw new Error('insufficient ids.');
+  }
+}
 
 async function get_list (db, table, ids, orders) {
   var wobj = _.extend({}, ids, { delete_date: null });
