@@ -16,7 +16,7 @@ module.exports = async (pdb, e) => {
 
   var dao = {};
 
-  var fs = await pi.each(_.values(e.get_entities()), async (v) => {
+  var fs = await pi.forEachSeries(_.values(e.get_entities()), async (v) => {
     var name = v.name;
     var table = await e.get_table_name(name);
     var keys = await e.get_table_key_column_names(v);

@@ -13,7 +13,7 @@ async function main() {
   var db = await dba.connect(con);
   var e = await entity(con);
 
-  await pi.forEach(_.values(e.get_entities()), async (v) => {
+  await pi.forEachSeries(_.values(e.get_entities()), async (v) => {
     var screate = await e.generate_create_sql(v);
     var sdrop = await e.generate_drop_sql(v);
     var sinsert = await e.generate_insert_sql(v, await e.get_data(v.name));
