@@ -48,9 +48,13 @@ module.exports = {
     await pi.forEachSeries(_.values(e.get_entities()), async (v) => {
       var recs = await e.get_data(v.name);
 
-      await check_dao_func_existence(d, v.name);
       await check_dao_list(d, v, recs);
       await check_dao_item(d, v, recs);
+
+      if (v.name === 'user') {
+        await check_dao_user_by_name(d, v, recs);
+      }
+
       await check_dao_update(d, v, recs);
       await check_dao_delete(d, v, recs);
       await check_dao_new(d, v, recs);
@@ -69,18 +73,6 @@ async function check_sql (type, entity, data) {
   console.log(sql2.yellow);
 
   chai.assert.equal(sql1, sql2);
-}
-
-async function check_dao_func_existence (d, name) {
-  chai.assert.property(d, name + '_list');
-  chai.assert.property(d, name);
-  chai.assert.property(d, name + '_new');
-  chai.assert.property(d, name + '_update');
-  chai.assert.property(d, name + '_delete');
-
-  if (name === 'user') {
-    chai.assert.property(d, name + '_by_name');
-  }
 }
 
 async function check_dao_list (d, entity, recs) {
@@ -239,5 +231,27 @@ async function check_dao_new (d, entity, recs) {
     }
 
     chai.assert.deepEqual(rec_act, rec_exp);
+  });
+}
+
+async function check_dao_user_by_name (d, entity, recs) {
+  var name = entity.name;
+  var keys = await e.get_table_key_column_names(entity);
+
+  await pi.forEachSeries(recs, async (v) => {
+    var rec_exp = v;
+    var rec_act = await d.user_by_name(v.name);
+
+    if (entity.debug) {
+      console.log(rec_exp);
+      console.log(rec_act);
+    }
+
+    if (rec_exp.delete_date === null) {
+      chai.assert.deepEqual(rec_act, rec_exp);
+    }
+    else {
+      chai.assert.equal(rec_act, null);
+    }
   });
 }
