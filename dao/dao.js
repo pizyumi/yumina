@@ -26,23 +26,49 @@ module.exports = async (pdb, e) => {
     var funcs = {};
 
     funcs[name + '_list'] = async (ids) => {
-      return await get_list(table, keys, ids);
+      var orders = {};
+      _(keys).each((v) => orders[v] = 1);
+
+      return await get_list(table, _.pick(ids, keys), orders);
     };
     funcs[name] = async (ids) => {
-      return await get_item(table, ids);
+      if (_(keys).all((v) => ids[v] !== undefined)) {
+        return await get_item(table, _.pick(ids, keys));
+      }
+      else {
+        throw new Error('insufficient ids.');
+      }
     };
     funcs[name + '_new'] = async (ids, pobj) => {
-      return await new_item(table, keys, ids, pobj, uniques);
+      var nlkeys = _(keys).initial();
+      var lkey = _(keys).last();
+
+      if (_(nlkeys).all((v) => ids[v] !== undefined)) {
+        return await new_item(table, lkey, _.pick(ids, nlkeys), pobj, uniques);
+      }
+      else {
+        throw new Error('insufficient ids.');
+      }
     };
     funcs[name + '_update'] = async (ids, pobj) => {
-      return await update_item(table, ids, pobj, uniques);
+      if (_(keys).all((v) => ids[v] !== undefined)) {
+        return await update_item(table, _.pick(ids, keys), pobj, uniques);
+      }
+      else {
+        throw new Error('insufficient ids.');
+      }
     };
     funcs[name + '_delete'] = async (ids) => {
-      return await delete_item(table, ids);
+      if (_(keys).all((v) => ids[v] !== undefined)) {
+        return await delete_item(table, _.pick(ids, keys));
+      }
+      else {
+        throw new Error('insufficient ids.');
+      }
     };
 
     try {
-      funcs = _.extend({}, funcs, require(path.join(e.get_entity_path(name), 'dao.js'))(funcs, dao, db));
+      funcs = _.extend({}, funcs, require(path.join(process.cwd(), e.get_entity_path(name), 'dao.js'))(funcs, dao, db));
     }
     catch (err) {
       console.log(err.message.magenta);
@@ -67,9 +93,7 @@ async function get_item (table, ids) {
   return await common.select_one_by_sql(db, sql, ids);
 }
 
-async function new_item (table, keys, ids, pobj, unique_columns) {
-  var lkey = _(keys).last();
-
+async function new_item (table, lkey, ids, pobj, unique_columns) {
   var csql = common.create_select_max_sql(table, lkey, ids);
   var max = (await common.select_one_by_sql(db, csql, ids))[lkey];
   var lid = 1;
