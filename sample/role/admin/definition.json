@@ -1,0 +1,5 @@
+{
+  "api": "/admin/",
+  "web": "/admin/", 
+  "debug": false
+}
