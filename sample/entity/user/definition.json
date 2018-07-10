@@ -22,5 +22,5 @@
     }
   ],
   "auth": [],
-  "debug": true
+  "debug": false
 }
