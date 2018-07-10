@@ -1,0 +1,72 @@
+.my-form-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+label {
+  font-weight: bold;
+}
+
+.control-width-1024 {
+  width: 1024px !important;
+}
+
+.control-width-496 {
+  width: 496px !important;
+}
+
+.control-width-512 {
+  width: 512px !important;
+}
+
+.control-width-256 {
+  width: 256px !important;
+}
+
+.control-message {
+  margin-top: .25rem;
+  font-size: 80%;
+}
+
+.item-image {
+  max-width: 256px;
+  max-height: 256px;
+}
+
+.calendar {
+  table-layout: fixed;
+  width: 800px;
+  margin: 16px auto;
+  text-align: center;
+  border: 1px #cccccc solid;
+  border-collapse: collapse;
+}
+
+.calendar th {
+  border: 1px #cccccc solid;
+  border-collapse: collapse;
+}
+
+.calendar td {
+  padding: 16px;
+  border: 1px #cccccc solid;
+  border-collapse: collapse;
+}
+
+.calendar .month {
+  background: #efefef;
+}
+
+.calendar .weekday {
+  background: #fffaf0;
+}
+
+.calendar .suturday {
+  background: #b7dafc;
+}
+
+.calendar .sunday {
+  background: #ffcece;
+}
