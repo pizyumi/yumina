@@ -26,7 +26,7 @@ async function main() {
   var e = await entity(con);
   var d = await dao(db, e);
   var r = await role(con);
-  var svr = await server.start(con, d, r);
+  var svr = await server.start(con, e, d, r);
 
   var end_server_once = _.once(server.end);
   var disconnect_db_once = _.once(dba.disconnect);
