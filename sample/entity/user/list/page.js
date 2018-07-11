@@ -1,3 +1,1 @@
-window.onload = () => {
-  list_page({});
-};
+window.onload = () => list_page({});
