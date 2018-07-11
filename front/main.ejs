@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title><%- title %></title>
+  <link href="/asset/css/lib.css" rel="stylesheet">
+</head>
+<body>
+  <script src="/asset/js/lib.js"></script>
+  <script src="/asset/js/<%- name %>-<%- type %>.js"></script>
+
+  <div id="main" style="display: none;" v-show="loaded">
+    <div class="alert alert-danger d-flex" v-for="err in errs" :key="err.id">
+      <strong>{{ err.text }}</strong>
+      <button type="button" class="close ml-auto" @click="delete_err(err.id)">
+        <span>&times;</span>
+      </button>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand mr-auto" href="#"><%- title %></a>
+      <span class="navbar-text"><%- username %>様</span>
+      <a href="/logout">ログアウト</a>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <ul class="nav nav-pills flex-column col-2 px-2 py-2">
+          <li class="nav-item" v-for="m in menu['<%- rname %>']" :key="m.name">
+            <a class="nav-link" :class="{ active: m.active }" :href="m.url">{{ m.disp }}</a>
+          </li>
+        </ul>
+        <div class="col-10 px-3 py-3">
+
+<%- contents %>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
