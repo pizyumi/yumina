@@ -28,6 +28,9 @@ module.exports = (common) => {
       var keys = await e.get_table_key_column_names(entity);
 
       return _.extend({}, _.object(keys, scommon.handle_ids_parameter(req)));
+    },
+    get_title: (con) => {
+      return con.appname;
     }
   }
 };
