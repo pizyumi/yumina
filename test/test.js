@@ -27,6 +27,8 @@ module.exports = {
     e = await entity(con);
     d = await dao(db, e);
 
+    await app.compile(con, e);
+
     await pi.forEachSeries(_.values(e.get_entities()), async (v) => {
       var sdrop = await e.generate_drop_sql(v);
       var screate = await e.generate_create_sql(v);

@@ -32,6 +32,9 @@ async function main() {
   var e = await entity(con);
   var d = await dao(db, e);
   var r = await role(con);
+
+  await app.compile(con, e);
+
   var svr = await server.start(con, e, d, r);
 
   var end_server_once = _.once(server.end);
