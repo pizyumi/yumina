@@ -1,5 +1,6 @@
 {
   "api": "/",
-  "web": "/", 
+  "web": "/",
+  "auto_generate_web": true,
   "debug": false
 }
