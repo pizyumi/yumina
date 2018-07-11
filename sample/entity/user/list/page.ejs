@@ -1,7 +1,7 @@
 <div>
-  <h2 class="py-3">ユーザー一覧</h2>
+  <h2 class="py-3"><%- disp %>一覧</h2>
 
-  <list :columns="columns" :rows="users" :is_update="true" :is_delete="true" @update="update_item" @delete="delete_item"></list>
+  <list :columns="<%- pname %>_columns" :rows="<%- pname %>" :is_update="<%- is_update %>" :is_delete="<%- is_delete %>" @update="update_item" @delete="delete_item"></list>
 
   <button type="button" class="btn btn-primary" @click="new_item">新規作成</button>
 </div>

@@ -27,10 +27,13 @@ var init = (option) => {
   });
 };
 
-var list_page = (name, url, logic, option) => {
+var list_page = (option) => {
+  var url = '/api' + rurl + pname;
+  var logic = window[ename + '_logic'];
+
   var data = _.extend({}, option.data);
-  data[name] = [];
-  data.columns = logic.list_schema;
+  data[pname] = [];
+  data[pname + '_columns'] = logic.list_schema;
 
   var vm = init({
     data: data,
@@ -53,7 +56,7 @@ var list_page = (name, url, logic, option) => {
   });
 
   axios.get(url, {}).then((res) => {
-    vm[name] = _(res.data).map((v) => logic.to_list_disp ? logic.to_list_disp(v) : v);
+    vm[pname] = _(res.data).map((v) => logic.to_list_disp ? logic.to_list_disp(v) : v);
   }).catch((err) => {
     vm.add_err('データの読み込みに失敗しました。');
   }).finally(() => {
