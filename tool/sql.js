@@ -1,5 +1,6 @@
 var _ = require('underscore');
 var pi = require('p-iteration');
+var yargs = require('yargs');
 
 var path = require('path');
 
@@ -9,8 +10,19 @@ var dba = require('../lib/dba');
 var entity = require('../lib/entity');
 
 async function main() {
-  var con = await app.initialize({}, 'dev');
-  var db = await dba.connect(con);
+  yargs.options({
+    c: {
+      alias: 'conf',
+      description: 'path to config file',
+      type: 'string',
+      default: 'sample\\config'
+    }
+  });
+
+  var args = yargs.parse(process.argv);
+
+  var con = await app.initialize({}, 'dev', args.conf);
+  var db = await dba.connect(con, args.conf);
   var e = await entity(con);
 
   await pi.forEachSeries(_.values(e.get_entities()), async (v) => {

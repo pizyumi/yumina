@@ -21,8 +21,9 @@ var d = null;
 
 module.exports = {
   before: async () => {
-    var con = await app.initialize({}, 'test');
-    db = await dba.connect(con);
+    var p_conf = 'sample\\config';
+    var con = await app.initialize({}, 'test', p_conf);
+    db = await dba.connect(con, p_conf);
     e = await entity(con);
     d = await dao(db, e);
 
