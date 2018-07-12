@@ -1,0 +1,23 @@
+<script>
+var is_new = <%- is_new %>;
+</script>
+
+<div>
+  <h2 class="py-3">{{ header }}</h2>
+
+  <div class="alert alert-danger d-flex" v-for="err in form_errs" :key="err.id">
+    <strong>{{ err.text }}</strong>
+    <button type="button" class="close ml-auto" @click="delete_form_err(err.id)">
+      <span>&times;</span>
+    </button>
+  </div>
+
+  <entity :data="<%- ename %>" :items="items" :auxs="auxs" :is_err_disp="is_err_disp" :updated="updated"></entity>
+
+<% if (is_new) { %>
+  <button type="button" class="btn btn-primary" @click="new_item">新規作成</button>
+<% } else { %>
+  <button type="button" class="btn btn-primary" @click="update_item">変更</button>
+<% } %>
+
+</div>

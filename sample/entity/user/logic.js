@@ -29,3 +29,5 @@ var user_logic = {
   list_schema: list_schema,
   item_schema: item_schema
 };
+
+module.exports = user_logic;
