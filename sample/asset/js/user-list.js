@@ -58,6 +58,8 @@ var menu = {
   }]
 };
 
+var module = {};
+
 var err_id = 0;
 
 var data_main = {
@@ -87,10 +89,17 @@ var init = (option) => {
   });
 };
 
-var list_page = (name, url, logic, option) => {
+var list_page = (option) => {
+  var pname = ext.pname;
+  var ename = ext.ename;
+  var rurl = ext.rurl;
+
+  var url = '/api' + rurl + pname;
+  var logic = window[ename + '_logic'];
+
   var data = _.extend({}, option.data);
-  data[name] = [];
-  data.columns = logic.list_schema;
+  data[pname] = [];
+  data[pname + '_columns'] = logic.list_schema;
 
   var vm = init({
     data: data,
@@ -113,7 +122,7 @@ var list_page = (name, url, logic, option) => {
   });
 
   axios.get(url, {}).then((res) => {
-    vm[name] = _(res.data).map((v) => logic.to_list_disp ? logic.to_list_disp(v) : v);
+    vm[pname] = _(res.data).map((v) => logic.to_list_disp ? logic.to_list_disp(v) : v);
   }).catch((err) => {
     vm.add_err('データの読み込みに失敗しました。');
   }).finally(() => {
@@ -123,13 +132,21 @@ var list_page = (name, url, logic, option) => {
   return vm;
 };
 
-var item_page = (name, url, logic, option) => {
+var item_page = (option) => {
   var id = _(window.location.pathname.split('/')).last();
 
-  var data = _.extend({}, option.data, { auxs: logic.auxs });
-  data[name] = logic.to_item_edit_empty ? logic.to_item_edit_empty() : {};
+  var pname = ext.pname;
+  var ename = ext.ename;
+  var rurl = ext.rurl;
+
+  var url = '/api' + rurl + pname;
+  var logic = window[ename + '_logic'];
+
+  var data = _.extend({}, option.data);
+  data[ename] = logic.to_item_edit_empty ? logic.to_item_edit_empty() : {};
   data.header = '';
   data.items = logic.item_schema;
+  data.auxs = logic.auxs;
   data.form_errs = [];
   data.is_err_disp = false;
   data.is_errs = {};
@@ -144,11 +161,11 @@ var item_page = (name, url, logic, option) => {
       update_item: () => {
         vm.form_errs = [];
 
-        if (_(vm.is_errs).some((v, k) => v)) {
+        if (_(vm.is_errs).some((v) => v)) {
           vm.is_err_disp = true;
         }
         else {
-          var data = logic.to_item ? logic.to_item(vm[name]) : vm[name];
+          var data = logic.to_item ? logic.to_item(vm[ename]) : vm[ename];
           if (_.isError(data)) {
             vm.add_form_err(data.message);
           }
@@ -164,11 +181,11 @@ var item_page = (name, url, logic, option) => {
       new_item: () => {
         vm.form_errs = [];
 
-        if (_(vm.is_errs).some((v, k) => v)) {
+        if (_(vm.is_errs).some((v) => v)) {
           vm.is_err_disp = true;
         }
         else {
-          var data = logic.to_item ? logic.to_item(vm[name]) : vm[name];
+          var data = logic.to_item ? logic.to_item(vm[ename]) : vm[ename];
           if (_.isError(data)) {
             vm.add_form_err(data.message);
           }
@@ -190,13 +207,13 @@ var item_page = (name, url, logic, option) => {
     })
   });
 
-  if (isnew) {
+  if (is_new) {
     vm.loaded = true;
   }
   else {
     axios.get(url + '/' + id, {}).then((res) => {
-      vm[name] = logic.to_item_edit ? logic.to_item_edit(res.data) : res.data;
-      vm.header = vm[name].name;
+      vm[ename] = logic.to_item_edit ? logic.to_item_edit(res.data) : res.data;
+      vm.header = vm[ename].name;
     }).catch(function (err) {
       vm.add_err('データの読み込みに失敗しました。');
     }).finally(() => {
@@ -298,6 +315,6 @@ var user_logic = {
   item_schema: item_schema
 };
 
-window.onload = () => {
-  list_page('users', '/api/admin/users', user_logic, {});
-};
+module.exports = user_logic;
+
+window.onload = () => list_page({});
