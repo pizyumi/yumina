@@ -9,26 +9,9 @@ var entity = require('./lib/entity');
 var role = require('./lib/role');
 var server = require('./lib/server');
 
-async function main() {
-  yargs.options({
-    e: {
-      alias: 'env',
-      description: 'enviromnent',
-      type: 'string',
-      default: 'dev'
-    },
-    c: {
-      alias: 'conf',
-      description: 'path to config file',
-      type: 'string',
-      default: 'sample\\config'
-    }
-  });
-
-  var args = yargs.parse(process.argv);
-
-  var con = await app.initialize({}, args.env, args.conf);
-  var db = await dba.connect(con, args.conf);
+module.exports = async (env, conf) => {
+  var con = await app.initialize({}, env, conf);
+  var db = await dba.connect(con, conf);
   var e = await entity(con);
   var d = await dao(db, e);
   var r = await role(con);
@@ -57,9 +40,32 @@ async function main() {
       });
     }
   });
+};
+
+async function main() {
+  yargs.options({
+    e: {
+      alias: 'env',
+      description: 'enviromnent',
+      type: 'string',
+      default: 'dev'
+    },
+    c: {
+      alias: 'conf',
+      description: 'path to config file',
+      type: 'string',
+      default: 'sample\\config'
+    }
+  });
+
+  var args = yargs.parse(process.argv);
+
+  await module.exports(args.env, args.conf);
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+if (module.parent === null) {
+  main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}
