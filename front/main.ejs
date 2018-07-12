@@ -8,12 +8,12 @@
 </head>
 <body>
   <script>
-var ename = '<%- name %>';
-var pname = '<%- pname %>';
-var rurl = '<%- rurl %>';
+var ename = '<%- ext.ename %>';
+var pname = '<%- ext.pname %>';
+var rurl = '<%- ext.rurl %>';
   </script>
   <script src="/asset/js/lib.js"></script>
-  <script src="/asset/js/<%- name %>-<%- type %>.js"></script>
+  <script src="/asset/js/<%- js %>.js"></script>
 
   <div id="main" style="display: none;" v-show="loaded">
     <div class="alert alert-danger d-flex" v-for="err in errs" :key="err.id">
