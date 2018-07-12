@@ -28,6 +28,10 @@ var init = (option) => {
 };
 
 var list_page = (option) => {
+  var pname = ext.pname;
+  var ename = ext.ename;
+  var rurl = ext.rurl;
+
   var url = '/api' + rurl + pname;
   var logic = window[ename + '_logic'];
 
