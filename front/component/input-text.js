@@ -13,7 +13,7 @@ Vue.component('input-text', {
         if (s.required) {
           if (v === undefined || v === '') {
             this.is_err = true;
-            this.err_message = s.disp + 'を入力してください。';
+            this.err_message = _.template(__('empty_item'))({ name: s.disp });
             return;
           }
         }
@@ -21,14 +21,14 @@ Vue.component('input-text', {
           if (s.length_min) {
             if (v.length < s.length_min) {
               this.is_err = true;
-              this.err_message = s.disp + 'は' + s.length_min + '文字以上でなければなりません。';
+              this.err_message = _.template(__('too_short_item'))({ name: s.disp, min: s.length_min });
               return;
             }
           }
           if (s.length_max) {
             if (v.length > s.length_max) {
               this.is_err = true;
-              this.err_message = s.disp + 'は' + s.length_max + '文字以内でなければなりません。';
+              this.err_message = _.template(__('too_long_item'))({ name: s.disp, max: s.length_max });
               return;
             }
           }

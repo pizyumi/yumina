@@ -1,0 +1,28 @@
+{
+  "back": {
+    "empty_username": "enter user id.",
+    "empty_password": "enter password.",
+    "wrong_username_or_password": "enter correct username/password."
+  },
+  "front": {
+    "user_id": "user id",
+    "password": "password",
+    "login": "log in",
+    "logout": "log out",
+    "new": "create",
+    "update": "modify",
+    "del": "delete",
+    "confirm": "confiirm",
+    "cancel": "cancel",
+    "sama": "",
+    "list": "list",
+    "confirm_delete": "delete '<%- name %>'?'",
+    "failed_delete": "failed to delete.",
+    "failed_load": "failed to load.",
+    "failed_save": "failed to save.",
+    "failed_new": "failed to create.",
+    "empty_item": "enter <%- name %>.",
+    "too_short_item": "min length of <%- name %> is <%- min %>",
+    "too_long_item": "max length of <%- name %> is <%- max %>"
+  }
+}

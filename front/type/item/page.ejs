@@ -15,9 +15,9 @@ var is_new = <%- is_new %>;
   <entity :data="<%- ename %>" :items="items" :auxs="auxs" :is_err_disp="is_err_disp" :updated="updated"></entity>
 
 <% if (is_new) { %>
-  <button type="button" class="btn btn-primary" @click="new_item">新規作成</button>
+  <button type="button" class="btn btn-primary" @click="new_item"><%- __('new') %></button>
 <% } else { %>
-  <button type="button" class="btn btn-primary" @click="update_item">変更</button>
+  <button type="button" class="btn btn-primary" @click="update_item"><%- __('update') %></button>
 <% } %>
 
 </div>

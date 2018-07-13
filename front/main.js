@@ -52,7 +52,7 @@ var list_page = (option) => {
         axios.post(url + '/' + id + '?action=delete').then((res) => {
           window.location.href = '';
         }).catch((err) => {
-          vm.add_err('データの削除に失敗しました。');
+          vm.add_err(__('failed_delete'));
         });
       },
       new_item: () => {
@@ -64,7 +64,7 @@ var list_page = (option) => {
   axios.get(url, {}).then((res) => {
     vm[pname] = _(res.data).map((v) => logic.to_list_disp ? logic.to_list_disp(v) : v);
   }).catch((err) => {
-    vm.add_err('データの読み込みに失敗しました。');
+    vm.add_err(__('failed_load'));
   }).finally(() => {
     vm.loaded = true;
   });
@@ -113,7 +113,7 @@ var item_page = (option) => {
             axios.post(url + '/' + id, data).then((res) => {
               window.location.href = '';
             }).catch((err) => {
-              vm.add_err('データの保存に失敗しました。');
+              vm.add_err(__('failed_save'));
             });
           }
         }
@@ -133,7 +133,7 @@ var item_page = (option) => {
             axios.post(url + '?action=new', data).then((res) => {
               window.location.href = window.location.pathname + '/' + res.data.id;
             }).catch((err) => {
-              vm.add_err('データの新規作成に失敗しました。');
+              vm.add_err(__('failed_new'));
             });
           }
         }
@@ -155,7 +155,7 @@ var item_page = (option) => {
       vm[ename] = logic.to_item_edit ? logic.to_item_edit(res.data) : res.data;
       vm.header = vm[ename].name;
     }).catch(function (err) {
-      vm.add_err('データの読み込みに失敗しました。');
+      vm.add_err(__('failed_load'));
     }).finally(() => {
       vm.loaded = true;
     });

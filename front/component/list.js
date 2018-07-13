@@ -10,7 +10,7 @@ Vue.component('list', {
     }
   },
   props: ['columns', 'rows', 'is_update', 'is_delete'],
-  template: `
+  template: _.template(`
     <table class="table table-striped table-hover">
       <thead>
         <tr>
@@ -29,8 +29,8 @@ Vue.component('list', {
             </td>
           </template>
           <td>
-            <button v-if="is_update" type="button" class="btn btn-primary" @click="$emit('update', row.id)">変更</button>
-            <button v-if="is_delete" type="button" class="btn btn-danger" data-toggle="modal" data-target="#list_delete_modal" @click="select(row.id)">削除</button>
+            <button v-if="is_update" type="button" class="btn btn-primary" @click="$emit('update', row.id)"><%- __('update') %></button>
+            <button v-if="is_delete" type="button" class="btn btn-danger" data-toggle="modal" data-target="#list_delete_modal" @click="select(row.id)"><%- __('del') %></button>
           </td>
         </tr>
       </tbody>
@@ -38,21 +38,21 @@ Vue.component('list', {
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <label class="modal-title">確認</label>
+              <label class="modal-title"><%- __('confirm') %></label>
               <button type="button" class="close" data-dismiss="modal">
                 <span>&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              「{{ selected.name }}」を削除しますか？
+              <%- _.template(__('confirm_delete'))({ name: '{{ selected.name }}'}) %>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-danger" @click="$emit('delete', selected.id)">削除</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+              <button type="button" class="btn btn-danger" @click="$emit('delete', selected.id)"><%- __('del') %></button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal"><%- __('cancel') %></button>
             </div>
           </div>
         </div>
       </div>
     </table>
-  `
+  `)({ __: __ })
 });

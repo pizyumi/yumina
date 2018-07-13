@@ -1,0 +1,28 @@
+{
+  "back": {
+    "empty_username": "ユーザーIDを入力してください。",
+    "empty_password": "パスワードを入力してください。",
+    "wrong_username_or_password": "ユーザーIDかパスワードが間違っています。"
+  },
+  "front": {
+    "user_id": "ユーザーID",
+    "password": "パスワード",
+    "login": "ログイン",
+    "logout": "ログアウト",
+    "new": "新規作成",
+    "update": "変更",
+    "del": "削除",
+    "confirm": "確認",
+    "cancel": "キャンセル",
+    "sama": "様",
+    "list": "一覧",
+    "confirm_delete": "「<%- name %>」を削除しますか？",
+    "failed_delete": "データの削除に失敗しました。",
+    "failed_load": "データの読み込みに失敗しました。",
+    "failed_save": "データの保存に失敗しました。",
+    "failed_new": "データの新規作成に失敗しました。",
+    "empty_item": "<%- name %>を入力してください。",
+    "too_short_item": "<%- name %>は<%- min %>文字以上でなければなりません。",
+    "too_long_item": "<%- name %>は<%- max %>文字以内でなければなりません。"
+  }
+}

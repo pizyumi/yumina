@@ -1,5 +1,6 @@
 var _ = require('underscore');
 var co = require('co');
+var i18n = require('i18n');
 var yargs = require('yargs');
 
 var app = require('./lib/app');
@@ -8,6 +9,12 @@ var dba = require('./lib/dba');
 var entity = require('./lib/entity');
 var role = require('./lib/role');
 var server = require('./lib/server');
+
+i18n.configure({
+    directory: 'locales',
+    updateFiles: false,
+    objectNotation: true
+});
 
 module.exports = async (env, conf) => {
   var con = await app.initialize({}, env, conf);
