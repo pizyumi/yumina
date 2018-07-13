@@ -3,6 +3,8 @@ var co = require('co');
 var i18n = require('i18n');
 var yargs = require('yargs');
 
+var path = require('path');
+
 var app = require('./lib/app');
 var dao = require('./dao/dao');
 var dba = require('./lib/dba');
@@ -11,14 +13,14 @@ var role = require('./lib/role');
 var server = require('./lib/server');
 
 i18n.configure({
-    directory: 'locales',
+    directory: path.join(__dirname, 'locales'),
     updateFiles: false,
     objectNotation: true
 });
 
-module.exports = async (env, conf) => {
-  var con = await app.initialize({}, env, conf);
-  var db = await dba.connect(con, conf);
+module.exports = async (env, p_work) => {
+  var con = await app.initialize(env, p_work, __dirname);
+  var db = await dba.connect(con);
   var e = await entity(con);
   var d = await dao(db, e);
   var r = await role(con);
@@ -57,17 +59,17 @@ async function main() {
       type: 'string',
       default: 'dev'
     },
-    c: {
-      alias: 'conf',
-      description: 'path to config file',
+    w: {
+      alias: 'work',
+      description: 'path to work folder',
       type: 'string',
-      default: 'sample\\config'
+      default: 'sample'
     }
   });
 
   var args = yargs.parse(process.argv);
 
-  await module.exports(args.env, args.conf);
+  await module.exports(args.env, args.work);
 }
 
 if (module.parent === null) {

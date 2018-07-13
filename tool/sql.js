@@ -11,18 +11,18 @@ var entity = require('../lib/entity');
 
 async function main() {
   yargs.options({
-    c: {
-      alias: 'conf',
-      description: 'path to config file',
+    w: {
+      alias: 'work',
+      description: 'path to work folder',
       type: 'string',
-      default: 'sample\\config'
+      default: 'sample'
     }
   });
 
   var args = yargs.parse(process.argv);
 
-  var con = await app.initialize({}, 'dev', args.conf);
-  var db = await dba.connect(con, args.conf);
+  var con = await app.initialize('dev', args.work, path.dirname(__dirname));
+  var db = await dba.connect(con);
   var e = await entity(con);
 
   await pi.forEachSeries(_.values(e.get_entities()), async (v) => {
