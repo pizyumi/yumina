@@ -6,7 +6,7 @@ var yargs = require('yargs');
 var path = require('path');
 
 var app = require('./lib/app');
-var dao = require('./dao/dao');
+var dao = require('./lib/dao');
 var dba = require('./lib/dba');
 var entity = require('./lib/entity');
 var role = require('./lib/role');
