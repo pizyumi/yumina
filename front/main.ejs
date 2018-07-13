@@ -31,7 +31,7 @@ var ext = <%- JSON.stringify(ext) %>;
       <div class="row">
         <ul class="nav nav-pills flex-column col-2 px-2 py-2">
           <li class="nav-item" v-for="m in menu['<%- rname %>']" :key="m.name">
-            <a class="nav-link" :class="{ active: m.active }" :href="m.url">{{ m.disp }}</a>
+            <a class="nav-link" :class="{ active: m.active }" :href="_.template(m.url)(ext)">{{ m.disp }}</a>
           </li>
         </ul>
         <div class="col-10 px-3 py-3">
