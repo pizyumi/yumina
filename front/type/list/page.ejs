@@ -1,5 +1,5 @@
 <div>
-  <h2 class="py-3"><%- disp %><%- __('list') %></h2>
+  <h2 class="py-3"><%- disp %> <%- __('list') %></h2>
 
   <list :columns="<%- pname %>_columns" :rows="<%- pname %>" :is_update="<%- is_update %>" :is_delete="<%- is_delete %>" @update="update_item" @delete="delete_item"></list>
 
