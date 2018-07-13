@@ -29,7 +29,7 @@ module.exports = (common) => {
 
       return _.extend({}, _.object(keys, scommon.handle_ids_parameter(req)));
     },
-    get_title: (con) => {
+    get_title: (req, con) => {
       return con.appname;
     }
   }

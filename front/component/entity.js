@@ -2,7 +2,7 @@ Vue.component('entity', {
   props: ['data', 'items', 'auxs', 'is_err_disp', 'updated'],
   template: `
     <form>
-      <form-item v-for="item in items" :label="item.disp">
+      <form-item v-for="item in items" :label="item['disp_' + ext.lang]">
         <input-text v-if="item.type === 'text'" v-model="data[item.name]" :schema="item" :is_err_disp="is_err_disp" @updated="updated(item.name, $event)"></input-text>
         <input-integer v-else-if="item.type === 'integer'" v-model="data[item.name]" :schema="item" :is_err_disp="is_err_disp" @updated="updated(item.name, $event)"></input-integer>
         <select-one v-else-if="item.type === 'select'" v-model="data[item.name]" :options="auxs[item.options]" :schema="item" @updated="updated(item.name, $event)"></select-one>

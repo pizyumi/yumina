@@ -1,23 +1,28 @@
 var list_schema = [{
-  disp: 'ID',
+  disp_en: 'ID',
+  disp_ja: 'ID',
   name: 'id',
   key: true
 }, {
-  disp: '名称',
+  disp_en: 'name',
+  disp_ja: '名称',
   name: 'name'
 }, {
-  disp: 'パスワード',
+  disp_en: 'password',
+  disp_ja: 'パスワード',
   name: 'password'
 }];
 
 var item_schema = [{
-  disp: '名称',
+  disp_en: 'name',
+  disp_ja: '名称',
   name: 'name',
   type: 'text',
   required: true,
   length_max: 256
 }, {
-  disp: 'パスワード',
+  disp_en: 'password',
+  disp_ja: 'パスワード',
   name: 'password',
   type: 'text',
   required: true,

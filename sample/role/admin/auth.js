@@ -45,8 +45,8 @@ module.exports = (common) => {
 
       return _.extend({}, _.object(keys, scommon.handle_ids_parameter(req)));
     },
-    get_title: (con) => {
-      return con.appname + ' （管理者）';
+    get_title: (req, con) => {
+      return con.appname + ' ' + req.__('back.admin');
     }
   }
 };

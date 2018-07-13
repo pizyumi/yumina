@@ -64,7 +64,7 @@ module.exports = (common) => {
         return _.extend({ user_id: req.user.id }, _.object(_(keys).rest(1), scommon.handle_ids_parameter(req)));
       }
     },
-    get_title: (con) => {
+    get_title: (req, con) => {
       return con.appname;
     }
   }

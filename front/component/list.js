@@ -14,7 +14,7 @@ Vue.component('list', {
     <table class="table table-striped table-hover">
       <thead>
         <tr>
-          <th v-for="column in columns" :key="column.name" scope="col">{{ column.disp }}</th>
+          <th v-for="column in columns" :key="column.name" scope="col">{{ column['disp_' + ext.lang] }}</th>
           <th scope="col"></th>
         </tr>
       </thead>

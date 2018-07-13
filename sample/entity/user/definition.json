@@ -1,5 +1,6 @@
 {
-  "disp": "ユーザー", 
+  "disp_en": "user",
+  "disp_ja": "ユーザー",
   "schema": [
     {
       "name": "id",
