@@ -9,19 +9,8 @@ var common = require('../lib/common');
 var dba = require('../lib/dba');
 var entity = require('../lib/entity');
 
-async function main() {
-  yargs.options({
-    w: {
-      alias: 'work',
-      description: 'path to work folder',
-      type: 'string',
-      default: 'sample'
-    }
-  });
-
-  var args = yargs.parse(process.argv);
-
-  var con = await app.initialize('dev', args.work, path.dirname(__dirname));
+module.exports = async (p_work) => {
+  var con = await app.initialize('dev', p_work, path.dirname(__dirname));
   var db = await dba.connect(con);
   var e = await entity(con);
 
@@ -42,9 +31,26 @@ async function main() {
   });
 
   await dba.disconnect(db);
+};
+
+async function main() {
+  yargs.options({
+    w: {
+      alias: 'work',
+      description: 'path to work folder',
+      type: 'string',
+      default: 'sample'
+    }
+  });
+
+  var args = yargs.parse(process.argv);
+
+  await module.exports(args.work);
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+if (module.parent === null) {
+  main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}
