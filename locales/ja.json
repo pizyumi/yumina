@@ -16,6 +16,8 @@
     "cancel": "キャンセル",
     "sama": "様",
     "list": "一覧",
+    "month": "月",
+    "day": "日",
     "confirm_delete": "「<%- name %>」を削除しますか？",
     "failed_delete": "データの削除に失敗しました。",
     "failed_load": "データの読み込みに失敗しました。",
@@ -23,6 +25,10 @@
     "failed_new": "データの新規作成に失敗しました。",
     "empty_item": "<%- name %>を入力してください。",
     "too_short_item": "<%- name %>は<%- min %>文字以上でなければなりません。",
-    "too_long_item": "<%- name %>は<%- max %>文字以内でなければなりません。"
+    "too_long_item": "<%- name %>は<%- max %>文字以内でなければなりません。",
+    "too_small_item": "<%- name %>は<%- min %><%- unit %>以上でなければなりません。",
+    "too_large_item": "<%- name %>は<%- max %><%- unit %>以上でなければなりません。",
+    "incomplete_item": "<%- name %>を入力する場合には全ての項目を入力してください。また、入力しない場合には全ての項目を空にしてください。",
+    "not_range_item": "<%- name %>が範囲を表していません。入力を逆にしている可能性があります。"
   }
 }
