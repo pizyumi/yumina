@@ -28,6 +28,5 @@
     "new": ["admin"],
     "update": ["admin", "user"],
     "delete": ["admin"]
-  },
-  "debug": false
+  }
 }

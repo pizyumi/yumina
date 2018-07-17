@@ -1,5 +1,4 @@
 {
   "api": "/public/",
-  "web": "/public/",
-  "debug": false
+  "web": "/public/"
 }

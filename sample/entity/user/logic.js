@@ -30,7 +30,6 @@ var item_schema = [{
 }];
 
 var user_logic = {
-  auxs: {},
   list_schema: list_schema,
   item_schema: item_schema
 };
