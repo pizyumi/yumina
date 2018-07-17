@@ -30,7 +30,7 @@ module.exports = (common) => {
       return _.extend({}, _.object(keys, scommon.handle_ids_parameter(req)));
     },
     get_title: (req, con) => {
-      return con.appname;
+      return con['appname_disp_' + req.getLocale()];
     }
   }
 };
