@@ -18,7 +18,7 @@ module.exports = async (env, p_work) => {
   var d = await dao(db, e);
   var r = await role(con);
 
-  await app.compile(con, e);
+  await app.compile(con, e, r);
 
   var svr = await server.start(con, e, d, r);
 
