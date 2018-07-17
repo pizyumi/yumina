@@ -33,7 +33,7 @@ var __ = (n) => ldata[n];
       <div class="row">
         <ul class="nav nav-pills flex-column col-2 px-2 py-2">
           <li class="nav-item" v-for="m in menu['<%- rname %>']" :key="m.name">
-            <a class="nav-link" :class="{ active: m.active }" :href="_.template(m.url)(ext)">{{ m['disp_' + ext.lang] }}</a>
+            <a class="nav-link" :class="{ active: window.location.pathname.indexOf(_.template(m.url)(ext)) === 0 }" :href="_.template(m.url)(ext)">{{ m['disp_' + ext.lang] }}</a>
           </li>
         </ul>
         <div class="col-10 px-3 py-3">
