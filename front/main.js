@@ -86,7 +86,7 @@ var item_page = (option) => {
   data[ename] = logic.to_item_edit_empty ? logic.to_item_edit_empty() : {};
   data.header = '';
   data.items = logic.item_schema;
-  data.auxs = logic.auxs;
+  data.auxs = logic.auxs ? logic.auxs : {};
   data.form_errs = [];
   data.is_err_disp = false;
   data.is_errs = {};
