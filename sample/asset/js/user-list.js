@@ -3,14 +3,12 @@ var menu = {
     name: 'home',
     disp_en: 'home',
     disp_ja: 'ホーム',
-    url: '/index',
-    active: window.location.pathname === '/index'
+    url: '/index'
   }, {
     name: 'user',
     disp_en: 'user info',
     disp_ja: 'ユーザー情報',
-    url: '/users/<%- user_id %>',
-    active: window.location.pathname.indexOf('/user') === 0
+    url: '/users/<%- user_id %>'
   }, {
     name: 'admin',
     disp_en: 'admin',
@@ -22,14 +20,12 @@ var menu = {
     name: 'home',
     disp_en: 'home',
     disp_ja: 'ホーム',
-    url: '/admin/index',
-    active: window.location.pathname === '/admin/index'
+    url: '/admin/index'
   }, {
     name: 'users',
     disp_en: 'users',
     disp_ja: 'ユーザー',
-    url: '/admin/users',
-    active: window.location.pathname.indexOf('/admin/users') === 0
+    url: '/admin/users'
   }]
 };
 
@@ -121,7 +117,7 @@ var item_page = (option) => {
   data[ename] = logic.to_item_edit_empty ? logic.to_item_edit_empty() : {};
   data.header = '';
   data.items = logic.item_schema;
-  data.auxs = logic.auxs;
+  data.auxs = logic.auxs ? logic.auxs : {};
   data.form_errs = [];
   data.is_err_disp = false;
   data.is_errs = {};
@@ -290,7 +286,6 @@ var item_schema = [{
 }];
 
 var user_logic = {
-  auxs: {},
   list_schema: list_schema,
   item_schema: item_schema
 };
