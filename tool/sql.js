@@ -20,10 +20,15 @@ module.exports = async (p_work) => {
     var sinsert = await e.generate_insert_sql(v, await e.get_data(v.name));
     var sdelete = await e.generate_delete_sql(v);
 
-    await common.save_text_to_path(path.join(con.p_create_sql, v.name + '.sql'), screate);
-    await common.save_text_to_path(path.join(con.p_drop_sql, v.name + '.sql'), sdrop);
-    await common.save_text_to_path(path.join(con.p_insert_sql, v.name + '.sql'), sinsert);
-    await common.save_text_to_path(path.join(con.p_delete_sql, v.name + '.sql'), sdelete);
+    var pcreate = path.join(con.p_create_sql, v.name + '.sql');
+    var pdrop = path.join(con.p_drop_sql, v.name + '.sql');
+    var pinsert = path.join(con.p_insert_sql, v.name + '.sql');
+    var pdelete = path.join(con.p_delete_sql, v.name + '.sql');
+
+    await common.save_text_to_path(pcreate, screate);
+    await common.save_text_to_path(pdrop, sdrop);
+    await common.save_text_to_path(pinsert, sinsert);
+    await common.save_text_to_path(pdelete, sdelete);
 
     await common.execute_sql(db, sdrop);
     await common.execute_sql(db, screate);
