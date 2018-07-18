@@ -13,12 +13,12 @@ label {
   width: 1024px !important;
 }
 
-.control-width-496 {
-  width: 496px !important;
-}
-
 .control-width-512 {
   width: 512px !important;
+}
+
+.control-width-496 {
+  width: 496px !important;
 }
 
 .control-width-256 {
