@@ -15,7 +15,7 @@ module.exports = async (env, p_work) => {
   var con = await app.initialize(env, p_work, __dirname);
   var db = await dba.connect(con);
   var e = await entity(con);
-  var d = await dao(db, e);
+  var d = await dao(con, db, e);
   var r = await role(con);
 
   await app.compile(con, e, r);

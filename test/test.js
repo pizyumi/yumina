@@ -25,7 +25,7 @@ module.exports = {
     var con = await app.initialize('test', p_work, path.dirname(__dirname));
     db = await dba.connect(con);
     e = await entity(con);
-    d = await dao(db, e);
+    d = await dao(con, db, e);
 
     await app.compile(con, e);
 
