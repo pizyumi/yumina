@@ -35,6 +35,8 @@ module.exports = async (p_work) => {
     await common.execute_sql(db, sinsert);
   });
 
+  await common.copy_folder_from_path_to_path(con.p_public, con.p_fspublic);
+
   await dba.disconnect(db);
 };
 
